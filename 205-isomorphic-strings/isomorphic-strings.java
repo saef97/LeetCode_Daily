@@ -1,31 +1,22 @@
 class Solution {
     public boolean isIsomorphic(String s, String t) {
-        List<Character> sl = new ArrayList<>();
-        List<Character> tl = new ArrayList<>();
-        List<Integer> res = new ArrayList<>();
-        List<Integer> rest = new ArrayList<>();
-
+        Map<Character, Character> map1 = new HashMap<>();
+        Map<Character, Character> map2 = new HashMap<>();
         int n = s.length();
         for (int i = 0; i < n; i++) {
-            if (!sl.contains(s.charAt(i))) {
-                res.add(i);
-                sl.add(s.charAt(i));
-            } else {
-                res.add(sl.indexOf(s.charAt(i)));
-            }
-        }
-        for (int i = 0; i < n; i++) {
-            if (!tl.contains(t.charAt(i))) {
-                rest.add(i);
-                tl.add(t.charAt(i));
-            } else {
-                rest.add(tl.indexOf(t.charAt(i)));
-            }
-        }
-        if (res.equals(rest)) {
-            return true;
-        }
-        return false;
+            char c1 = s.charAt(i);
+            char c2 = t.charAt(i);
 
+            if (map1.containsKey(c1) && map1.get(c1) != c2)
+                return false;
+
+            if (map2.containsKey(c2) && map2.get(c2) != c1)
+                return false;
+
+            map1.put(c1, c2);
+            map2.put(c2, c1);
+        }
+
+        return true;
     }
 }

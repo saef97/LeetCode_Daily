@@ -4,22 +4,23 @@ class Solution {
     public boolean isHappy(int n) {
         //Set<Integer> set = 
         //set.add(n);
-        List<Integer> list = new ArrayList<>();
+       // List<Integer> list = new ArrayList<>();
           if (n == 1)
                 return true;
+        int sq = 0;
         while (n > 0) {
             // if(set.contains(n))return false;
 
           
             int rem = n % 10;
-            list.add(rem);
+            sq +=rem*rem;
             n = n / 10;
         }
-        int sq = 0;
-        for (int a : list) {
-            sq += (a * a);
+        // int sq = 0;
+        // for (int a : list) {
+        //     sq += (a * a);
 
-        }
+        // }
         if (set.contains(sq))
             return false;
         set.add(sq);

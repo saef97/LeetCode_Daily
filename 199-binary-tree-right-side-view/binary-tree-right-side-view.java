@@ -26,7 +26,10 @@ class Solution {
             for (int i = 0; i < size; i++) {
 
                 TreeNode curr = q.poll();
-                list.add(curr.val);
+                //list.add(curr.val);
+                if(i == size-1){
+                    res.add(curr.val);
+                }
                 
                 if (curr.left != null) {
                     q.offer(curr.left);
@@ -36,7 +39,7 @@ class Solution {
                 }
             }
             //TreeNode last= q.getLast();
-            res.add(list.get(list.size()-1));
+           // res.add(list.get(list.size()-1));
 
             //res.add(list);
         }

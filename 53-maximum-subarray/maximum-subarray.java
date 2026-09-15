@@ -1,21 +1,25 @@
 class Solution {
-    public int maxSubArray(int[] nums) {
-int n = nums.length;
-int sum = nums[0];
-int max = nums[0];
-        for(int i = 1;i<n;i++){
-            
-                sum = Math.max(sum+nums[i],nums[i]);
-max = Math.max(sum,max);
-            }
-            //max = ;
-            return max;
-        }
-    // int i = 0;int j = 0;int max =0;int n = nums.length;
-    // while(j<n){
-    //     sum+=nums[j];
-    //     j++;
+    int overAllMax;
+    Integer []t;
+    int recur(int i,int[]nums){
+        if(i == nums.length-1){
+            overAllMax = Math.max(nums[i],overAllMax);
+            return nums[i];
+            };
+        if(t[i] != null)return t[i];
+        int maxAti = Math.max(nums[i],nums[i]+ recur(i+1,nums));
 
-    //     max = Math.max(max,sum);
-    // }
+        overAllMax = Math.max(overAllMax,maxAti);
+        return t[i]=maxAti;
+    }
+    public int maxSubArray(int[] nums) {
+        //DP
+        t = new Integer[nums.length];
+        overAllMax = nums[0];
+       // Arrays.fill(t,)
+        recur(0,nums);
+
+        return overAllMax;
+        
+    }
 }

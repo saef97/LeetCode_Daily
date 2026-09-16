@@ -1,46 +1,37 @@
 class Solution {
-    void bfs(char[][] grid,int i,int j){
-        int [][]dir = {{0,-1},{-1,0},{1,0},{0,1}};
-         int m = grid.length;
-        int n = grid[0].length;
-        Deque<int[]> q = new ArrayDeque<>();
-        q.offer(new int[]{i,j});
-        while(!q.isEmpty()){
-            int [] curr = q.poll();
-            int oldi =curr[0];
-            int oldj = curr[1];
+    char[][] visited;
 
-            for(int []d:dir){
-                int newI = oldi+d[0];
-                int newJ = oldj+d[1];
-                if(newI<0 || newJ<0 ||newI >=m || newJ >=n)
+    void dfs(int i, int j, char[][] mat) {
+        mat[i][j] = '2';
+        int[][] dir = { { 0, -1 }, { -1, 0 }, { 1, 0 }, { 0, 1 } };
+        for (int[] d : dir) {
+            int newI = i + d[0];
+            int newJ = j + d[1];
+            if (newI < 0 || newI >= mat.length || newJ >= mat[0].length || newJ < 0) {
                 continue;
-                if(grid[newI][newJ] == '0')continue;
-                if(grid[newI][newJ] == '1'){
-                    grid[newI][newJ] = '2';
-                    q.offer(new int[]{newI,newJ});
-                }
-                
-
-
-            } 
+            }
+            
+            if (mat[newI][newJ] == '1') {
+                dfs(newI, newJ, mat);
+            }
         }
-        
     }
 
     public int numIslands(char[][] grid) {
         int count = 0;
         int m = grid.length;
         int n = grid[0].length;
+        visited = new char[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
-                    bfs(grid, i, j);
                     count++;
-                }
+                    dfs(i, j, grid);
 
+                }
             }
         }
         return count;
+
     }
 }

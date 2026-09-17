@@ -7,17 +7,13 @@ class Solution {
                 return Integer.compare(a[0],b[0]);
             }
         });
-        //Integer.compare(a[0],b[0]));
         int n = intervals.length;
-        int count= 1;
-        int lastE = intervals[0][1];
-        //int lastS = intervals[0][0];
+        int count = 1;
+        int last = intervals[0][1]; 
         for(int i = 1;i<n;i++){
-            if(intervals[i][1] <= lastE){
-                continue;
-            }else{
+            if(last < intervals[i][1]){
                 count++;
-                lastE = intervals[i][1];
+                last = intervals[i][1];
             }
         }
         return count;
